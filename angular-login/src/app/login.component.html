@@ -1,0 +1,80 @@
+
+<style>
+ 
+    main {
+      width: 100%;
+      min-height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      box-sizing: inherit;
+      position: relative;
+    }
+  
+    .content {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      max-width: 700px;
+      margin-bottom: 3rem;
+    }
+  
+    .content h1 {
+      margin-top: 1.75rem;
+    }
+  
+    .content p {
+      margin-top: 1.5rem;
+    }
+  
+    @media screen and (max-width: 650px) {
+      .content {
+        flex-direction: column;
+        width: max-content;
+      }
+  
+    }
+  </style>
+  
+  <main class="main">
+    <div class="content">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="example-container flex flex-col space-y-4">
+          <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input matInput type="text" formControlName="username" placeholder="Ex. Example007" required/>
+            <mat-error *ngIf="form.get('username')?.hasError('required') && (form.get('username')?.touched || submitted)">
+              Username is required
+            </mat-error>
+          </mat-form-field>
+      
+          <mat-form-field>
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" required/>
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="clickEvent($event)"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide()"
+              type="button"
+            >
+              <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error *ngIf="form.get('password')?.hasError('required') && (form.get('password')?.touched || submitted)">
+              Password is required
+            </mat-error>
+          </mat-form-field>
+      
+          <button mat-raised-button color="primary" type="submit">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+    
+  
+  <router-outlet />
+  
