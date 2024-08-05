@@ -30,7 +30,7 @@ export class LoginComponent {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {
+  constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -52,6 +52,5 @@ export class LoginComponent {
       console.log('Form is invalid');
     }
 
-    this.cdr.detectChanges();
   }
 }
